@@ -1,0 +1,224 @@
+html {
+  background-color: #282c34;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  sans-serif;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #282c34;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+button:focus,
+a:focus {
+  outline: none !important;
+}
+
+/* App */
+.App {
+  background-color: #282c34;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  flex-direction: column;
+}
+
+/* Navigation NAVBAR */
+.nav-wrapper {
+  height: 64px;
+}
+
+/* LOGIN SIGNUP */
+.log-in-wrapper {
+  background-color: #282c34;
+  color: #fff;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-in {
+  display: flex;
+  flex-direction: column;
+}
+
+/* LOGIN BUTTONS */
+.log-in button {
+  display: inline-block;
+  position: relative;
+  font-family: 'Raleway', sans-serif;
+  background-color: transparent;
+  margin: 10px;
+  padding: 15px;
+  width: 200px;
+  height: 50px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+
+}
+
+.btn-login {
+  color: #17cc64;
+  border: 2px solid #17cc64;
+}
+
+.btn-signup {
+  color: #1a92b8;
+  border: 2px solid #1a92b8;
+}
+
+.btn-login:hover {
+  color: #fff;
+  background-color: #17cc64;;
+}
+
+.btn-signup:hover {
+  color: #fff;
+  background-color: #1a92b8;
+}
+
+.log-in button::before, button::after{
+  content:"";
+  width: 0;
+  height: 2px;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+}
+
+.log-in button span::before, span::after{
+  content:"";
+  width:2px;
+  height:0;
+  position: absolute;
+  transition: all 0.2s linear;
+  background: #fff;
+}
+
+.log-in button:hover::before, .log-in button:hover::after{
+  width: 200px;
+}
+.log-in button:hover span::before, .log-in button:hover span::after{
+  height: 50px;
+}
+
+.btn-login::after, .btn-signup::after {
+  right: -2px;
+  bottom: -2px;
+  transition-duration: 0.4s;
+}
+.btn-login span::after, .btn-signup span::after {
+  right:-2px;
+  bottom: -2px;
+  transition-duration: 0.4s;
+}
+.btn-login::before, .btn-signup::before{
+  left: -2px;
+  top: -2px;
+  transition-duration: 0.4s;
+}
+.btn-login span::before, .btn-signup span::before{
+  left: -2px;
+  top: -2px;
+  transition-duration: 0.4s;
+}
+/* END LOGIN BUTTONS */
+
+/* DASHBOARD */
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin-top: 10px;
+}
+
+.game-board {
+  height: 100%;
+}
+
+.character-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* CHARACTER CARDS */
+.character-card {
+  width: 300px;
+  height: 515px;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: none !important;
+  /* background-image: url('../img/card-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+  background-color: #999 !important;
+  text-align: center;
+  overflow: hidden;
+}
+
+.character-card .card-title {
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.character-card img {
+  height: 290px;
+  width: 290px;
+  max-width: 290px;
+  border-radius: 5px 5px 0 0;
+  margin: 0 auto 5px 0;
+  overflow: hidden;
+}
+
+.character-card .card-body {
+  background-color: #fff;
+  border-radius: 0 0 5px 5px;
+  text-align: left;
+  padding: .5rem;
+  overflow: hidden;
+}
+/* END CHARACTER CARDS */
+
+/* CREATE NEW CHARACTER POPUP */
+.img-upload-requirements {
+  font-size: .6em;
+}
+
+.img-upload-requirements-list {
+  margin-left: 0;
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.form-label {
+  display: block;
+  font-weight: bold;
+}
+
+
+@media (max-width: 768px) {
+  .character-card {
+    margin: 0 auto 10px auto;
+  }
+}
