@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase/app';
 import { connect } from 'react-redux';
 import { createEquipment } from '../../store/actions/characterActions';
 
@@ -8,13 +9,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 class CreateEquipment extends Component {
-    state = {
+    constructor(props) {
+        super(props);
+
+    this.state = {
         show: null,
         title: "",
-        imgLink: "",
-        imgFile: null,
+        image: "",
+        imgURL: "",
         description: ""
     }
+}
 
     handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
@@ -30,47 +35,53 @@ class CreateEquipment extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
-        this.props.createCharacter(this.state);
+        this.props.createEquipment(this.state);
         this.handleClose(e);
     }
 
-    handFileSelect = e => {
-        console.log(e.target.files[0]);
+    handleUploadSuccess = (e) => {
+        const image = e.target.files[0];
+        const storageRef = firebase.storage().ref("equipment/" + image.name);
+
+        this.setState({ image: image.name }, () => {
+            storageRef.put(image).then(() => {
+                storageRef.getDownloadURL().then(url => this.setState({ imgURL: url }));
+            });
+        });
     }
+
+
 
     render() {
         return (
             <div className="log-in-wrapper">
-                <button className="btn-create-character" onClick={() => this.handleShow("create-new-equip")}><span>Create New Equipment</span></button>
+                <button className="btn-create-character" onClick={() => this.handleShow("create-new-char")}><span>Create New Character</span></button>
 
                 {/* Create New Character Modal */}
-                <Modal aria-labelledby="contained-modal-title-vcenter" centered show={this.state.show === "create-new-equip"} onHide={this.handleClose}>
+                <Modal aria-labelledby="contained-modal-title-vcenter" centered show={this.state.show === "create-new-char"} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                    <Modal.Title>Create New Equipment</Modal.Title>
+                    <Modal.Title>Create New Character</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>
                             <Form.Group controlId="formTitle">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Name Your Equipmentr" />
+                                <Form.Label>Title</Form.Label>
+                                <Form.Control type="text" name="title" onChange={this.handleChange} value={this.state.title} placeholder="Name Your Character" required/>
                             </Form.Group>
-
-                            <Form.Group controlId="formImg">
-                                <Form.Label>Equipment Image Upload</Form.Label>
-                                <Form.Control type="file" name="imgFile" onChange={this.handFileSelect} value={this.state.img} placeholder="Upload File" />
+                            <Form.Group controlId="formCharImg">
+                                <Form.Label>Character Image Upload</Form.Label>
+                                <Form.Control type='file' value={this.state.img} onChange={this.handleUploadSuccess} />
                                 <Form.Text className="img-upload-requirements">
                                     <ul className="img-upload-requirements-list">
-                                        <li><strong>Max Files Size:</strong> 75kb</li>
-                                        <li><strong>Image Size:</strong> Height 128px | Width 128px </li>
-                                        <li><strong>Background:</strong> White </li>
+                                        <li><strong>Max Files Size:</strong> 150kb</li>
+                                        <li><strong>Image Size:</strong> Height 290px | Width 290px </li>
                                     </ul>
                                 </Form.Text>
                             </Form.Group>
 
-                            <Form.Group controlId="formImg">
+                            <Form.Group controlId="formDescription">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Character Description" />
+                                <Form.Control type="text" name="description" onChange={this.handleChange} value={this.state.description} placeholder="Character Description" required/>
                             </Form.Group>
 
 
@@ -85,10 +96,13 @@ class CreateEquipment extends Component {
                         </Form>
                     </Modal.Body>
                 </Modal>
+
+                
             </div>
         );
     }
 }
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

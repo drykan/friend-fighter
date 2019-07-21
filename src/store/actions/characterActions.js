@@ -4,10 +4,6 @@ export const createCharacter = (character) => {
         const firestore = getFirestore();
         firestore.collection('characters').add({
             ...character,
-            authorFirstName: 'Dan',
-            authorLastName: 'Starks',
-            authorID: 12345,
-            createdAt: new Date()
         }).then(() => {
             dispatch({ type: 'CREATE_CHARACTER', character });
         }).catch((err) => {

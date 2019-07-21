@@ -1,7 +1,7 @@
 import React from 'react';
 // import fire from './firebase';
 import { connect } from 'react-redux';
-import { signIn } from '../../store/actions/authActions';
+import { signIn, signUp } from '../../store/actions/authActions';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -28,8 +28,10 @@ class SignUpSignIn extends React.Component {
         this.setState({ [e.target.name]: e.target.value });
     }
 
-    signup = (e) => {
+    handleSignup = (e) => {
         e.preventDefault();
+        this.props.signUp(this.state);
+        this.handleClose(e);        
     }
 
     handleLogin = (e) => {
@@ -127,7 +129,7 @@ class SignUpSignIn extends React.Component {
                                 <Button variant="secondary" onClick={this.handleClose}>
                                     Cancel
                                 </Button>
-                                <Button variant="primary" type="submit" onClick={this.signup}>
+                                <Button variant="primary" type="submit" onClick={this.handleSignup}>
                                     Signup
                                 </Button>
                             </Modal.Footer>
@@ -137,58 +139,7 @@ class SignUpSignIn extends React.Component {
 
             </div>
         );
-    }
-
-
-
-
-
-    // login = (e) => {
-    //     e.preventDefault();
-    //     fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).catch((error) => {
-    //         console.log(error);
-    //     });
-    //     this.handleClose(e);
-    // }
-
-    // loginWithFacebook(e) {
-    //     e.preventDefault();
-    //     fire.auth().signInWithPopup(facebookProvider)
-    //       .then((result, err) => {
-    //         if (err) {
-    //           console.log("unable to sign in with Facebook")
-    //         } else {
-    //           this.setState({ loggedIn: true });
-    //         }
-    //       });
-    //   }
-
-    // signup = (e) => {
-    //     e.preventDefault();
-    //     fire.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((resp) => {
-
-    //         this.writeUserData(resp.user.uid, this.state.firstName, this.state.lastName, this.state.username, this.state.email);
-    //     }).catch((error) => {
-    //         console.log(error);
-    //         this.errorMessage(error);
-    //     });
-    //     this.handleClose(e);
-    // }
-
-    // writeUserData(userId, first_name, last_name, username, email) {
-    //     fire.database().ref('users/' + userId).set({
-    //         userFirstName: first_name,
-    //         userLastName: last_name,
-    //         userUsername: username,
-    //         userEmail: email
-    //     });
-    // }
-
-    // loginSignupError = (e) => {
-    //     return e
-    // }
-
-    
+    }    
 }
 
 const mapStateToProps = (state) => {
@@ -199,7 +150,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds))
+        signIn: (creds) => dispatch(signIn(creds)),
+        signUp: (newUser) => dispatch(signUp(newUser))
     }
 }
 

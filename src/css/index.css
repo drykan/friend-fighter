@@ -24,8 +24,7 @@ code {
     monospace;
 }
 
-button:focus,
-a:focus {
+button:focus {
   outline: none !important;
 }
 
@@ -44,7 +43,7 @@ a:focus {
 }
 
 /* LOGIN SIGNUP */
-.log-in-wrapper {
+.log-in-wrapper, .character-dashboard {
   background-color: #282c34;
   color: #fff;
   display: flex;
@@ -60,13 +59,13 @@ a:focus {
 }
 
 /* LOGIN BUTTONS */
-.log-in button {
+.btn-outline-anim {
   display: inline-block;
   position: relative;
   font-family: 'Raleway', sans-serif;
   background-color: transparent;
   margin: 10px;
-  padding: 15px;
+  padding: 12px 15px 15px 15px;
   width: 200px;
   height: 50px;
   -webkit-transition-duration: 0.4s;
@@ -80,22 +79,12 @@ a:focus {
   border: 2px solid #17cc64;
 }
 
-.btn-signup {
-  color: #1a92b8;
-  border: 2px solid #1a92b8;
-}
-
 .btn-login:hover {
   color: #fff;
   background-color: #17cc64;;
 }
 
-.btn-signup:hover {
-  color: #fff;
-  background-color: #1a92b8;
-}
-
-.log-in button::before, button::after{
+.btn-outline-anim::before, button::after {
   content:"";
   width: 0;
   height: 2px;
@@ -104,7 +93,7 @@ a:focus {
   background: #fff;
 }
 
-.log-in button span::before, span::after{
+.btn-outline-anim span::before, span::after {
   content:"";
   width:2px;
   height:0;
@@ -113,29 +102,41 @@ a:focus {
   background: #fff;
 }
 
-.log-in button:hover::before, .log-in button:hover::after{
+.btn-signup,
+.btn-create-character {
+  color: #1a92b8;
+  border: 2px solid #1a92b8;
+}
+
+.btn-signup:hover,
+.btn-create-character:hover {
+  color: #fff;
+  background-color: #1a92b8;
+}
+
+.btn-outline-anim:hover::before, .btn-outline-anim:hover::after {
   width: 200px;
 }
-.log-in button:hover span::before, .log-in button:hover span::after{
+.btn-outline-anim:hover span::before, .btn-outline-anim:hover span::after {
   height: 50px;
 }
 
-.btn-login::after, .btn-signup::after {
+.btn-login::after, .btn-signup::after, .btn-create-character::after {
   right: -2px;
   bottom: -2px;
   transition-duration: 0.4s;
 }
-.btn-login span::after, .btn-signup span::after {
+.btn-login span::after, .btn-signup span::after, .btn-create-character span::after {
   right:-2px;
   bottom: -2px;
   transition-duration: 0.4s;
 }
-.btn-login::before, .btn-signup::before{
+.btn-login::before, .btn-signup::before, .btn-create-character::before {
   left: -2px;
   top: -2px;
   transition-duration: 0.4s;
 }
-.btn-login span::before, .btn-signup span::before{
+.btn-login span::before, .btn-signup span::before, .btn-create-character span::before{
   left: -2px;
   top: -2px;
   transition-duration: 0.4s;
@@ -159,6 +160,10 @@ a:focus {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.character-dashboard button {
+
 }
 
 /* CHARACTER CARDS */

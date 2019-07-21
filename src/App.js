@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 import MainNavbar from './components/layout/Navbar';
 import Dashboard from './components/dashboard/Dashboard';
 import SignUpSignIn from './components/auth/SignUpSignIn';
@@ -9,8 +10,6 @@ class App extends Component {
     super(props);
 
     this.state = {
-      authenticated: false,
-      playStatus: false
     }
   }
 
@@ -20,13 +19,15 @@ class App extends Component {
 
 
   render() {
+    const { auth } = this.props;
+
     return (
       <BrowserRouter>
         <div className="App">
-          <MainNavbar auth={this.state.authenticated} playBtnClick={this.playBtnClick}/>
-          {this.state.authenticated ?
+          <MainNavbar />
+          {auth.uid ?
             <Switch>
-              <Route exact path="/" render={(props) => <Dashboard {...props} play={this.state.playStatus} />} />
+              <Route exact path="/" render={(props) => <Dashboard {...props} />} />
             </Switch>
             :
             <SignUpSignIn />
@@ -37,4 +38,11 @@ class App extends Component {
   }
 } 
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+      auth: state.firebase.auth
+  }
+}
+
+
+export default connect(mapStateToProps)(App);

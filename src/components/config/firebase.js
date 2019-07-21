@@ -13,7 +13,7 @@ const config = {
   };
 
 const fire = firebase.initializeApp(config);
-const storage = firebase.storage();
+const storage = firebase.storage().ref();
 
 // export const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
